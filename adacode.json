@@ -1,0 +1,115 @@
+{
+  "id": "wordcraft",
+  "nama": "WordCraft",
+  "deskripsi": "Pengolah kata ala Microsoft Word — ditulis dari nol dengan Rust. Buka & simpan DOCX, ekspor PDF, ringan dan offline, bisa disetir agen AI lewat MCP.",
+  "kategori": "Produktivitas",
+  "tag": "Work Efficiency",
+  "sumber": "https://github.com/storytold/wordcraft",
+  "lisensi": "MIT OR Apache-2.0",
+  "sorot": [
+    "Buka & simpan DOCX, ODT, RTF, HTML, Markdown; ekspor PDF dan PNG",
+    "Gaya, tabel, gambar, track changes, komentar, mail merge",
+    "Agen AI adaCODE bisa menulis & merapikan dokumen di folder kerja lewat MCP",
+    "Status hulu: alpha (v0.10.0)"
+  ],
+  "perkiraan": {
+    "disk_mb": 185,
+    "ram_mb": 250,
+    "catatan": "Unduhan 97 MB (zip portabel resmi, SHA-256 diverifikasi); terpasang ±185 MB. RAM perkiraan, belum diukur."
+  },
+  "ikon": "wordcraft.png",
+  "gambar": "gambar.jpg",
+  "versi_manifes": 1,
+  "butuh_gpu": false,
+  "bisa_pindah_vps": false,
+  "os_didukung": [
+    "win32"
+  ],
+  "app_minimal": "0.2.4",
+  "prasyarat": [],
+  "pasang": [
+    {
+      "aksi": "log",
+      "pesan": "Mengunduh WordCraft 0.10.0 (±97 MB)…"
+    },
+    {
+      "aksi": "shell",
+      "perintah_windows": "curl -L --fail -o wordcraft.zip https://github.com/storytold/wordcraft/releases/download/v0.10.0/wordcraft-0.10.0-windows-x64-portable.zip"
+    },
+    {
+      "aksi": "log",
+      "pesan": "Memeriksa keaslian berkas (SHA-256)…"
+    },
+    {
+      "aksi": "shell",
+      "perintah_windows": "powershell -NoProfile -ExecutionPolicy Bypass -Command \"if((Get-FileHash wordcraft.zip -Algorithm SHA256).Hash -ne '141d9458d776b4a664f20fbb0e2cd5619c327e0873abbc01bf4530dc339592fb'){Write-Host 'SHA-256 tidak cocok - unduhan ditolak'; Remove-Item wordcraft.zip; exit 1}\""
+    },
+    {
+      "aksi": "log",
+      "pesan": "Membongkar WordCraft ke folder app…"
+    },
+    {
+      "aksi": "shell",
+      "perintah_windows": "\"%SystemRoot%\\System32\\tar.exe\" -xf wordcraft.zip && xcopy /e /y /i /q wordcraft-0.10.0-windows-x64-portable app && rmdir /s /q wordcraft-0.10.0-windows-x64-portable && del /q wordcraft.zip"
+    },
+    {
+      "aksi": "log",
+      "pesan": "WordCraft siap. Setelan tersimpan di %APPDATA%\\WordCraft (app ini belum punya mode portabel)."
+    }
+  ],
+  "jalan": {
+    "perintah_windows": "app\\wordcraft.exe",
+    "tanpa_url": true
+  },
+  "perbarui": [
+    {
+      "aksi": "log",
+      "pesan": "Memperbarui WordCraft ke 0.10.0 (±97 MB) — setelan dipertahankan…"
+    },
+    {
+      "aksi": "shell",
+      "perintah_windows": "curl -L --fail -o wordcraft.zip https://github.com/storytold/wordcraft/releases/download/v0.10.0/wordcraft-0.10.0-windows-x64-portable.zip"
+    },
+    {
+      "aksi": "log",
+      "pesan": "Memeriksa keaslian berkas (SHA-256)…"
+    },
+    {
+      "aksi": "shell",
+      "perintah_windows": "powershell -NoProfile -ExecutionPolicy Bypass -Command \"if((Get-FileHash wordcraft.zip -Algorithm SHA256).Hash -ne '141d9458d776b4a664f20fbb0e2cd5619c327e0873abbc01bf4530dc339592fb'){Write-Host 'SHA-256 tidak cocok - unduhan ditolak'; Remove-Item wordcraft.zip; exit 1}\""
+    },
+    {
+      "aksi": "log",
+      "pesan": "Membongkar WordCraft ke folder app…"
+    },
+    {
+      "aksi": "shell",
+      "perintah_windows": "\"%SystemRoot%\\System32\\tar.exe\" -xf wordcraft.zip && xcopy /e /y /i /q wordcraft-0.10.0-windows-x64-portable app && rmdir /s /q wordcraft-0.10.0-windows-x64-portable && del /q wordcraft.zip"
+    }
+  ],
+  "setel_ulang": [],
+  "catatan": {
+    "sumber_binari": "Zip portabel resmi rilis v0.10.0 dari GitHub storytold/wordcraft; SHA-256 dicocokkan dengan SHA256SUMS.txt rilis yang sama (141d9458d776b4a664f20fbb0e2cd5619c327e0873abbc01bf4530dc339592fb).",
+    "satu_folder": "Zip WordCraft 0.10.0 tak membawa portable.txt dan binernya tak mengenal mode portabel (diperiksa 25 Okt 2026): setelan & log ke %APPDATA%\\WordCraft. Menghapus app TIDAK membuang folder itu; setel_ulang dikosongkan karena aksi folder hanya berlaku di folder app.",
+    "perbarui": "xcopy menimpa berkas program saja; data pengguna tak ada di zip sehingga utuh.",
+    "mcp": "Bidang \"mcp\": adaCODE App (>= 0.3.52) menulis apps/wordcraft/.mcp.json; adaVIBE menyambungkan server \"adalocal-wordcraft\" ke tiap sesi (akar = folder proyek sesi) dan adaGENTIC memakainya lewat lokal_mcp_alat/lokal_mcp_panggil (akar = ~/adaLOCAL). @folder_kerja@ diisi app, bukan server. Di luar akar ditolak (\"automation path rejected\") — teruji 25 Okt.",
+    "ai_bawaan": "Lapisan AI Craft (craft-ai-integrations) masih draf & belum terhubung ke app — AI masuk lewat agen adaCODE (MCP), bukan model bawaan.",
+    "os": "Pilot hanya Windows x64. Linux & Mac tersedia di hulu, belum diuji.",
+    "tar": "tar.exe bawaan Windows dipanggil dgn jalur lengkap: GNU tar (Git for Windows di PATH) menolak zip."
+  },
+  "populer": 0,
+  "unggulan": false,
+  "ditambahkan": "2026-10-25",
+  "mcp": {
+    "perintah_windows": "{{folder_app}}\\app\\wordcraft-cli.exe",
+    "args": [
+      "mcp",
+      "--automation-read-root",
+      "@folder_kerja@",
+      "--automation-write-root",
+      "@folder_kerja@"
+    ],
+    "jelas": "Tulis & sunting dokumen Word di folder kerja: buat dokumen, ketik, format, simpan DOCX/PDF/ODT/MD.",
+    "petunjuk": "Cara pakai: (1) new_document {template: blank|letter|resume|report} atau open_document {path}. (2) type_text {text, paragraphs: true} menulis di kursor (satu baris = satu paragraf); format lain lewat execute {command, params} — cari id perintah dengan list_commands. (3) Periksa hasil dengan get_text atau inspect_document. (4) save_document {path}: formatnya mengikuti ekstensi (.docx, .pdf, .odt, .md, .html) — simpan ke nama BARU kecuali pengguna minta menimpa. Jalur berkas harus di dalam folder kerja."
+  }
+}
